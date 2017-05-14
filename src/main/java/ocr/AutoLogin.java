@@ -3,16 +3,18 @@ package ocr;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Masachi on 2017/4/18.
@@ -20,7 +22,7 @@ import java.util.Random;
 public class AutoLogin {
     private static WebClient wc = new WebClient(BrowserVersion.CHROME);
     public static List<String> ua = new ArrayList<String>();
-    private String URL = "http://202.118.201.228/homepage/index.do";
+    private String URL = "http://202.118.201.228/academic/common/security/login.jsp";
     private HtmlPage page;
 
     private static void ReadUA() {
@@ -39,12 +41,14 @@ public class AutoLogin {
 
     private static void setClient() throws Exception{
         Random random = new Random();
+        Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         wc.getOptions().setJavaScriptEnabled(true); //启用JS解释器，默认为true
         wc.getOptions().setCssEnabled(false); //禁用css支持
 //        wc.getOptions().setProxyConfig(new ProxyConfig("185.10.17.134",3128));
-        wc.getCookieManager().setCookiesEnabled(false);
+        wc.getCookieManager().setCookiesEnabled(true);
         wc.getOptions().setThrowExceptionOnScriptError(false); //js运行错误时，是否抛出异常
         wc.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        wc.getOptions().setPrintContentOnFailingStatusCode(false);
         wc.getOptions().setTimeout(100000); //设置连接超时时间 ，这里是10S。如果为0，则无限期等待
 
         wc.waitForBackgroundJavaScript(600*1000);
@@ -56,14 +60,15 @@ public class AutoLogin {
 //        System.out.println(page);
     }
 
-    public void loginToRemoteServer(String username,String password){
+    public String loginToRemoteServer(String username,String password){
+        String result = "";
         try {
             setClient();
             getPage();
-            HtmlElement usernameElement = page.getElementByName("j_username");
-            HtmlElement passwordElement = page.getElementByName("j_password");
-            HtmlElement captureElement = page.getElementByName("j_captcha");
-            HtmlElement loginButton = page.getElementByName("login");
+            HtmlTextInput usernameElement = page.getElementByName("j_username");
+            HtmlPasswordInput passwordElement = page.getElementByName("j_password");
+            HtmlTextInput captureElement = page.getElementByName("j_captcha");
+            HtmlElement loginButton = page.getElementByName("button1");
             HtmlImage captureImg = (HtmlImage) page.getElementByName("jcaptcha");
             // TODO: 2017/4/4 htmlimage下载成图片然后OCR
             captureImg.saveAs(new File("file/temp.jpg"));
@@ -73,12 +78,16 @@ public class AutoLogin {
             passwordElement.focus();
             passwordElement.type(password);
             captureElement.focus();
-            //captureElement.type(capture);
-            //loginButton.click();
+            captureElement.type(VerifyCode.getVerifyCode().replace(" ",""));
+            HtmlPage realPage = (HtmlPage) loginButton.click();
+            wc.waitForBackgroundJavaScript(100000);
+            System.out.println(realPage.getTitleText());
+            return realPage.getTitleText();
         }
         catch (Exception e){
             e.printStackTrace();
         }
+        return result;
     }
 
     private void getPage(){
