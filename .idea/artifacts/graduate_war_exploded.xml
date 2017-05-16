@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="jfinalgraduate:war exploded">
+  <artifact type="exploded-war" name="graduate:war exploded">
     <output-path>$PROJECT_DIR$/target/graduate</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="jfinalgraduate" />
+          <element id="module-output" name="graduate" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.jfinal:jfinal:2.2" />
@@ -25,6 +25,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" />
           <element id="library" level="project" name="Maven: org.slf4j:log4j-over-slf4j:1.7.25" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.29" />
           <element id="library" level="project" name="Maven: net.sourceforge.htmlunit:htmlunit:2.23" />
           <element id="library" level="project" name="Maven: xalan:xalan:2.7.2" />
           <element id="library" level="project" name="Maven: xalan:serializer:2.7.2" />
@@ -52,7 +53,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/graduate/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="jfinalgraduate/web/Web" />
+      <element id="javaee-facet-resources" facet="graduate/web/Web" />
     </root>
   </artifact>
 </component>
