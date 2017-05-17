@@ -28,7 +28,7 @@ public class NotificationCrawler {
     private String URL = "http://202.118.201.228/homepage/index.do";
     private HtmlPage page;
 
-    public boolean getNotification(){
+    public ArrayList<Notification> getNotification(){
         try{
             setClient();
             page = wc.getPage(URL);
@@ -44,13 +44,14 @@ public class NotificationCrawler {
                 notificationTemp.setUrl(baseUrl + temp.select("td").select("div").select("a").attr("href"));
                 //System.out.println(baseUrl + temp.select("td").select("div").select("a").attr("href"));
                 //System.out.println(notificationTemp.getDate() + notificationTemp.getTitle() + notificationTemp.getUrl());
+                notification.add(notificationTemp);
             }
 
-            return true;
+            return notification;
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

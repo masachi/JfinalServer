@@ -11,6 +11,8 @@ import model.Notification;
  */
 public class DemoConfig extends JFinalConfig {
         public void configConstant(Constants me) {
+            DBconn dBconn = new DBconn();
+            dBconn.setConnection();
             me.setDevMode(true);
         }
         public void configRoute(Routes me) {

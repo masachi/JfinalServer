@@ -40,25 +40,7 @@
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:log4j-over-slf4j:1.7.25" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.29" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:jconsole:1.8.0">
-        <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/lib/jconsole.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:tools:1.8.0">
-        <CLASSES>
-          <root url="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.18" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.htmlunit:htmlunit:2.23" level="project" />
     <orderEntry type="library" name="Maven: xalan:xalan:2.7.2" level="project" />
     <orderEntry type="library" name="Maven: xalan:serializer:2.7.2" level="project" />
