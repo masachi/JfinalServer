@@ -6,5 +6,5 @@ RUN cd /java-graduate
 WORKDIR /java-graduate
 RUN mvn compile
 RUN mvn package
-ADD target/graduate.war /var/lib/tomcat8/webapps/
+RUN cp target/graduate.war /var/lib/tomcat8/webapps/
 CMD ["service tomcat8 run"]
