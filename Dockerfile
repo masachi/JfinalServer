@@ -10,5 +10,5 @@ RUN cd /java-graduate
 WORKDIR /java-graduate
 RUN mvn compile
 RUN mvn package
-RUN cp target/graduate.war /var/lib/tomcat8/webapps/
+RUN cp target/graduate.war /srv/tomcat8/apache-tomcat-8.5.9/webapps/
 CMD ["/srv/tomcat8/apache-tomcat-8.5.9/bin/catalina.sh", "run"]
