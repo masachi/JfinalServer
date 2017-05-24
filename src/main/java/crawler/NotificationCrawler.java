@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Created by sdlds on 2017/5/14.
  */
 public class NotificationCrawler {
-    private static WebClient wc = new WebClient(BrowserVersion.CHROME);
+    private static WebClient wc;
     public static List<String> ua = new ArrayList<String>();
     private String baseUrl = "http://202.118.201.228";
     private String URL = "http://202.118.201.228/homepage/index.do";
@@ -47,6 +47,8 @@ public class NotificationCrawler {
                 notification.add(notificationTemp);
             }
 
+            wc = null;
+
             return notification;
         }
         catch (Exception e){
@@ -70,6 +72,7 @@ public class NotificationCrawler {
 //    }
 
     private static void setClient() throws Exception{
+        wc = new WebClient(BrowserVersion.CHROME);
         Random random = new Random();
         //Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
         wc.getOptions().setJavaScriptEnabled(true); //启用JS解释器，默认为true
