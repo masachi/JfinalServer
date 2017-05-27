@@ -28,6 +28,8 @@ public class LoginController extends Controller {
 //            code.setMessage("Internal Error");
 //        }
 
+
+
         try{
             Statement selectUser = DBconn.connection.createStatement();
             String sql = "select * from user where username = " + username;
@@ -44,7 +46,7 @@ public class LoginController extends Controller {
             }
             else{
                 code.setCode(500);
-                code.setMessage("No User");
+                code.setMessage("No Such User");
             }
         }
         catch (Exception e){
